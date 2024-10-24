@@ -76,7 +76,7 @@ class Neuron:
         elif self.activation == 'tanh':
             return tanh_derivative(s)
         elif self.activation == 'sign':
-            return 0
+            return 1
         elif self.activation == 'relu':
             return relu_derivative(s)
         elif self.activation == 'leaky relu':
@@ -135,6 +135,7 @@ def main():
 
         neuron = Neuron(num_of_inputs=2, activation=activation_function, learning_rate=learning_rate)
         neuron.train(data, labels)
+        # add epoch
 
         class_0_df = {"x": class_0_data[:, 0], "y": class_0_data[:, 1], "class": "Class 0"}
         class_1_df = {"x": class_1_data[:, 0], "y": class_1_data[:, 1], "class": "Class 1"}
