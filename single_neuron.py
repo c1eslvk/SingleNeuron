@@ -87,11 +87,12 @@ class Neuron:
         return self.activate(weighted_sum)  
 
     def train(self, X, y):
-        for x_i, target in zip(X, y):
-            output = self.predict(x_i)
-            error = target - output
-            self.weights += self.learning_rate * error * self.derivative(output) * x_i
-            self.bias += self.learning_rate * error * self.derivative(output)
+        for epoch in range(100):
+            for x_i, target in zip(X, y):
+                output = self.predict(x_i)
+                error = target - output
+                self.weights += self.learning_rate * error * self.derivative(output) * x_i
+                self.bias += self.learning_rate * error * self.derivative(output)
 
     
 
@@ -135,7 +136,6 @@ def main():
 
         neuron = Neuron(num_of_inputs=2, activation=activation_function, learning_rate=learning_rate)
         neuron.train(data, labels)
-        # add epoch
 
         class_0_df = {"x": class_0_data[:, 0], "y": class_0_data[:, 1], "class": "Class 0"}
         class_1_df = {"x": class_1_data[:, 0], "y": class_1_data[:, 1], "class": "Class 1"}
